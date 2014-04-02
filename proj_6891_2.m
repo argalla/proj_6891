@@ -68,11 +68,46 @@ dr_colon_unzipped = 'E:\Data\proj_6891\GSE14333_unzipped\';
 dr_raw_ovarian = 'E:\Data\proj_6891\GSE9891\';
 dr_ovarian_unzipped = 'E:\Data\proj_6891\GSE9891_unzipped\';
 
+breast_cel = dir(dr_breast_unzipped);
+colon_cel = dir(dr_colon_unzipped);
+ovarian_cel = dir(dr_ovarian_unzipped);
+
+% Only do this once; otherwise an error is asserted as the directories are
+% already filled with cel files
 %cel_extractor(dr_raw_breast,dr_breast_unzipped);
-cel_extractor(dr_raw_colon,dr_colon_unzipped);
+%cel_extractor(dr_raw_colon,dr_colon_unzipped);
 %cel_extractor(dr_raw_ovarian,dr_ovarian_unzipped);
-%% 7. RMA analysis of Affymetrix data sets
+
 % Includes 3 GEO data sets and ovarian TCGA
+% Note: still need to get .cel files for ovarian TCGA
+CDF_dr = 'E:\Data\proj_6891\CDF Files\'; %directory with CDF files - necessary for RMA algorithm
+
+% CDF info: breast - U133A
+%           colon  - U133Plus 2.0
+%          ovarian - U133Plus 2.0
+U133A_cdf = 'HG-U133A.cdf';
+U133Plus_cdf = 'HG-U133_Plus_2.cdf';
+
+% Make cell arrays of all cel files, 1 array each for breast, cancer, colon
+breast_cel_names = {breast_cel(3:end).name};
+colon_cel_names = {colon_cel(3:end).name};
+ovarian_cel_names = {ovarian_cel(3:end).name};
+
+%% 7. RMA implementation
+breast_rma = affyrma(breast_cel_names,U133A_cdf,'CelPath',dr_breast_unzipped, ...
+    'CDFPath',CDF_dr);
+save('E:\Data\proj_6891\breast_rma.mat','breast_rma');
+clearvars 'breast_rma'
+
+colon_rma = affyrma(colon_cel_names,U133Plus_cdf,'CelPath',dr_colon_unzipped,...
+    'CDFPath',CDF_dr);
+save('E:\Data\proj_6891\colon_rma.mat','colon_rma');
+clearvars 'colon_rma'
+
+ovarian_rma = affyrma(ovarian_cel_names,U133Plus_cdf,'CelPath',dr_ovarian_unzipped,...
+    'CDFPath',CDF_dr);
+save('E:\Data\proj_6891\ovarian_rma.mat','ovarian_rma');
+clearvars 'ovarian_rma'
 
 
 
