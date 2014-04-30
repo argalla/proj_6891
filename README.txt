@@ -3,7 +3,8 @@ Arthur Argall - E6891 Project
 For this project I have attempted to reproduce the results from the paper “Biomolecular Events in Cancer Revealed by Attractor Metagenes”, 
 PLoS Comp Bio, vol. 9, iss. 2, 2013. The authors of the paper are Wei-Yi Cheng, Tai-Hsien Ou Yang, and Dimitris Anastassiou. 
 
-4/30 update: preprocessed data has been uploaded along with the most recent version of the various scripts and functions.
+4/30 update: The most recent version of the various scripts and functions has been uploaded. The preprocessed data can be
+accessed at https://www.dropbox.com/home/Public/PLoSCompBio
 
 The script proj_6891_2 conducts a variety of data import and preprocessing methods. It uses the custom functions
 tcga_filerenamer, tcga_arraymaker_2, and cel_extractor. The function FileRename from Jan Simon is also necessary,
